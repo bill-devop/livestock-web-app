@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Carrying Capacity</title>
+        <style>
+            form {
+                display: block;
+                margin: 10px;
+            }
+            label {
+                display: block;
+                margin-top: 10px;
+            }
+            table {
+                margin-bottom: 20px;
+            }
+            th {
+                background-color: lightgray;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Carrying Capacity for Black Angus Cattle</h1>
+        <article>
+            <section>
+                <p>This project is used to determine the carrying capacity for cattle on your 
+                    land based off seasonal grass yields per your estimates. The output is an 
+                    annual average. For instance, while spring may offer much higher carry capacity,
+                    winter will, in most cases, raise your acreage requirements significantly.
+                    Enter 
+                    your estimated seasonal yield weight in pounds per acre below. Then click submit. 
+                </p>
+            </section>
+        </article>
+
+        <select>
+            <option>Select</option>
+            <option id='blackAngus'>Black Angus</option>
+        </select>
+
+        <label for='springYields'>Spring Grass Yield/Acre:</label>
+        <input id='springYields' type='number'>
+
+        <label for='summerYields'>Summer Grass Yield/Acre:</label>
+        <input id='summerYields' type='number'>
+
+        <label for='fallYields'>Fall Grass Yield/Acre:</label>
+        <input id='fallYields' type='number'>
+
+        <label for='winterYields'>Winter Grass Yield/Acre:</label>
+        <input id='winterYields' type='number'>
+
+        <label></label>
+        <input type='submit' id='submit'>
+
+        <!--<form>
+            <label for='units'>Select unit type</label>
+            <select>
+                <option>lbs</option>
+                <option>kg</option>
+            </select>
+
+            <label for='springYields'>Spring Grass Yield/Acre:</label>
+            <input id='springYields' type='number'>
+
+            <label for='summer-yields'>Summer Grass Yield/Acre:</label>
+            <input id='summer-yields' type='number'>
+
+            <label for='fall-yields'>Fall Grass Yield/Acre:</label>
+            <input id='fall-yields' type='number'>
+
+            <label for='winter-yields'>Winter Grass Yield/Acre:</label>
+            <input id='winter-yields' type='number'>
+
+            <label></label>
+            <input type='submit' id='submit'>
+        </form>-->
+
+        <table>
+            <tr>
+                <th>Breed</th>
+                <th>(% Body Weight Consumed/Day)<sup>1</sup></th>
+                <th>(% Body Weight Consumed/Day)<sup>2</sup></th>
+                <th>(% Body Weight Consumed/Day)<sup>Lactating</sup></th>
+            </tr>
+            <tr>
+                <th>Black Angus</th>
+                <td class='percent1'>1.6</td>
+                <td class='percent2'>1.8</td>
+                <td class='percentL'>2.6</td>
+            </tr>
+        </table>
+
+        <table class='ui'>
+            <tr>
+                <th></th>
+                <th>Breed</th>
+                <th>Spring Grass Yield/Acre</th>
+                <th>Summer Grass Yield/Acre</th>
+                <th>Fall Grass Yield/Acre</th>
+                <th>Winter Grass Yield/Acre</th>
+            </tr>
+            <tr>
+                <th>User Inputs</th>
+                <td class='breed'></td>
+                <td class='spring'></td>
+                <td class='summer'></td>
+                <td class='fall'></td>
+                <td class='winter'></td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th></th>
+                <th>Acres/Cow/Year<sup>1</sup></th>
+                <th>Acres/Cow/Year<sup>2</sup></th>
+                <th>Acres/Lactating Cow/Year<sup>Lactating</sup></th>
+            </tr>
+            <tr>
+                <th>AI Outputs</th>
+                <td class='c1'></td>
+                <td class='c2'></td>
+                <td class='clactating'></td>
+            </tr>
+        </table>
+
+        <script>
+            let spring = document.querySelector('.spring');
+            let summer = document.querySelector('.summer');
+            let fall = document.querySelector('.fall');
+            let winter = document.querySelector('.winter');
+            let percent1 = document.querySelector('.percent1');
+            let percent2 = document.querySelector('.percent2');
+            let percentL = document.querySelector('.percentL');
+            let carry1 = document.querySelector('.c1');
+            let carry2 = document.querySelector('.c2');
+            let carryLact = document.querySelector('.clactating');
+            //const button = document.querySelector('#submit');
+
+            const inputSpring = document.querySelector('#springYields');
+            const inputSummer = document.querySelector('#summerYields');
+            const inputFall = document.querySelector('#fallYields');
+            const inputWinter = document.querySelector('#winterYields');
+            const submit = document.querySelector('#submit')
+            const ui = document.querySelector('.ui');
+            const option = document.querySelector('select');
+            const breed = document.querySelector('.breed');
+
+            inputSpring.focus();
+            
+            submit.addEventListener('click', () => {
+                const tableRow = document.createElement('tr');
+                breed.textContent = option.value;
+                spring.textContent = inputSpring.value;
+                summer.textContent = inputSummer.value;
+                fall.textContent = inputFall.value;
+                winter.textContent = inputWinter.value;
+                carry1.textContent = inputSpring.value;
+
+                let weight = 1300;
+
+                function cc(x) {
+                    return (((weight * (Number(x.textContent) / 100) * 120) / Number(spring.textContent)) + (
+                        (weight * (Number(x.textContent) / 100) * 120) / Number(summer.textContent)) + (
+                            (weight * (Number(x.textContent) / 100) * 120) / Number(fall.textContent)) + (
+                                (weight * (Number(x.textContent) / 100) * 120) / Number(winter.textContent))) / 4;
+                }
+
+                carry1.textContent = cc(percent1);
+                carry2.textContent = cc(percent2);
+                carryLact.textContent = cc(percentL); 
+
+                /*tableRow.innerHTML =  `<td>Black Angus</td>
+                    <td>${inputSpring.value}</td>
+                    <td>${inputSummer.value}</td>
+                    <td>${inputFall.value}</td>
+                    <td>${inputWinter.value}</td>`;
+                ui.appendChild(tableRow);*/
+                inputSpring.focus();
+            });
+            
+
+            //let weight = 1300;
+
+            /*function cc(x) {
+                return (((weight * (Number(x.textContent) / 100) * 120) / Number(spring.textContent)) + (
+                    (weight * (Number(x.textContent) / 100) * 120) / Number(summer.textContent)) + (
+                        (weight * (Number(x.textContent) / 100) * 120) / Number(fall.textContent)) + (
+                            (weight * (Number(x.textContent) / 100) * 120) / Number(winter.textContent))) / 4;
+            }
+
+            carry1.textContent = cc(percent1);
+            carry2.textContent = cc(percent2);
+            carryLact.textContent = cc(percentL); */
+
+        </script>
+    </body>
+</html>

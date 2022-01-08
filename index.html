@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>DOMINATOR</title>
+        <style>
+            button {
+                background-color: #A5ECD7;
+                border-radius: 5px;
+                margin: 5px;
+                padding: 5px;
+            }
+            .about {
+                padding: 20px;
+                text-align: center;
+                color: #0278AE;
+                font-weight: bold;
+                margin-bottom: 40px;
+            }
+            .time, i {
+                text-align: center;
+                color: #0278AE;
+            }
+            .div4 { 
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                margin: 40px -20px 0 -20px;
+            }
+            i {
+                grid-column: 2;
+            }
+            .footer {
+                text-align: center;
+                font-size: 14px;
+                color: #E8FFC1;
+                padding-top: 40px;
+            }
+        </style>
+        <script src="https://kit.fontawesome.com/e889b213df.js" crossorigin="anonymous" defer></script>
+    </head>
+
+    <body>
+
+
+        <script>
+            const body = document.querySelector('body');
+
+            const div1 = document.createElement('div');
+            div1.style.width = '400px';
+            div1.style.height = '500px';
+            div1.style.backgroundColor = '#0278AE';
+            
+            body.appendChild(div1);
+
+            const title = document.createElement('h1');
+            title.textContent = 'Carry Capacity Estimator';
+            title.style.color = '#E8FFC1';
+            title.style.textAlign = 'center';
+
+            div1.appendChild(title);
+
+            const div2 = document.createElement('div');
+            div2.style.width = '400px';
+            div2.style.height = '40px';
+            div2.style.backgroundColor = '#51ADCF'
+
+            div1.appendChild(div2);
+            
+            const btn1 = document.createElement('button');
+            btn1.textContent = 'Home';
+
+            div2.appendChild(btn1);
+
+            const aCattle = document.createElement('a');
+            aCattle.href = 'cattle-capacity-patch01.html';
+            //.setAttribute('href', 'cattle-capacity.html');
+            //aCattle.setAttribute('target', '_blank');
+
+            const btn2 = document.createElement('button');
+            btn2.textContent = 'Cattle';
+
+            aCattle.appendChild(btn2);
+
+            div2.appendChild(aCattle);
+
+            const btn3 = document.createElement('button');
+            btn3.textContent = 'Bees';
+
+            div2.appendChild(btn3);
+
+            const div3 = document.createElement('div');
+            div3.style.width = '400px';
+            div3.style.height = '300px';
+            div3.style.backgroundColor = '#E8FFC1'
+
+            div1.appendChild(div3);
+
+            const article = document.createElement('article');
+            article.setAttribute('class', 'about');
+            div3.appendChild(article);
+            const para1 = document.createElement('para');
+            para1.textContent = 'Fast and Friendly. See how much livestock you can handle.';
+
+            article.appendChild(para1);
+
+            const div4 = document.createElement('div');
+            div4.style.width = '400px';
+            div4.style.height = '200px';
+            div4.setAttribute('class', 'div4');
+            
+            article.appendChild(div4);
+
+            const icon = document.createElement('i');
+            icon.setAttribute('class', 'far fa-clock');
+
+            const d = new Date();
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const day = days[d.getDay()];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 
+        'September', 'October', 'November', 'December']
+            const month = months[d.getMonth()];
+            const date = d.getDate();
+            const year = d.getYear()
+
+            const time = document.createElement('p');
+            time.setAttribute('class', 'time');
+            time.textContent = `${day}, ${month} ${date}th, ${1900 + year}`;
+
+            icon.appendChild(time);
+            div4.appendChild(icon);
+
+            const article2 = document.createElement('article');
+            article2.setAttribute('class', 'footer');
+
+            const para3 = document.createElement('para');
+            para3.textContent = 'Developed by Ranchers for Ranchers';
+
+            article2.appendChild(para3);
+            div1.appendChild(article2);
+
+        </script>
+    </body>
+
+</html>
